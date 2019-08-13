@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
+
+    if params[:back]
+      redirect_to user_path(@user.id)
+    else
+      @user = User.new
+    end
+  end
+
+  def confirm
+
   end
 
   def create
@@ -13,12 +22,32 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
+  def edit
     @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      flash[:success] = "Your account was updated"
+      redirect_to user_path(@user.id)
+    else
+      render 'edit'
+    end
+
+  end
+
+  def show
+    if logged_in?
+      @user = current_user
+    else
+      redirect_to new_session_path
+    end
   end
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :comment, :image)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :comment)
   end
 end

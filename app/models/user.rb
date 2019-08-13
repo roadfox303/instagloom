@@ -5,6 +5,9 @@ class User < ApplicationRecord
     uniqueness: true
   before_validation { email.downcase! }
   has_secure_password
-  validates :password, presence: true, length: { minimum:8 }
+  with_options unless: :id? do
+    validates :password, presence: true, length: { minimum:8 }
+  end
+  mount_uploader :image, ImageUploader
   has_many :articles
 end

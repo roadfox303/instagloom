@@ -1,0 +1,59 @@
+<h1>登録情報の変更</h1>
+<% @user.errors.full_messages.each do |message| %>
+  <%= message %>
+<% end %>
+<%= form_with(model: @user, local: true) do |f| %>
+<ul>
+  <li><div>ユーザー名：</div><div><%= f.text_field :name, placeholder:"#{current_user.name}" %></div></li>
+  <li>
+    <div>プロフィール画像：</div>
+    <div id="img_field_edit" onClick="$('#file').click()" >
+      aaaaa
+    <% if @user.image.url.present? %>
+      <%= image_tag(@user.image.url) %>
+    <% end %>
+    </div>
+    <%= f.file_field :image, style: "display:none;", id: "file"%>
+  </li>
+  <li>
+    <div>紹介文：</div>
+    <div><%= f.text_area :comment, placeholder:"#{current_user.comment}" %></div>
+  </li>
+  <li>
+    <div>メールアドレス：</div>
+    <div><%= f.email_field :email, placeholder:"#{current_user.email}" %></div>
+  </li>
+  <li>
+    <div>新パスワード：</div>
+    <div><%= f.password_field :password %></div>
+  </li>
+  <li>
+    <div>新パスワード確認：</div>
+    <div><%= f.password_field :password_confirmation %></div>
+  </li>
+  <%= f.submit "変更" %>
+</ul>
+<% end %>
+<script>
+$(function() {
+  $fileField = $('#file')
+  $($fileField).on('change', $fileField, function(e) {
+    file = e.target.files[0]
+    reader = new FileReader(),
+    $preview = $("#img_field");
+    reader.onload = (function(file) {
+      return function(e) {
+        $preview.empty();
+        $preview.append($('<img>').attr({
+          src: e.target.result,
+          width: "100%",
+          class: "preview",
+          title: file.name
+        }));
+      };
+    })(file);
+    reader.readAsDataURL(file);
+  });
+  // autosize($('textarea'));
+});
+</script>
