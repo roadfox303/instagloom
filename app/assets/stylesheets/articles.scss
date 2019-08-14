@@ -1,3 +1,53 @@
 // Place all the styles related to the articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#my_articles ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#my_articles li {
+  position: relative;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 0;
+}
+#img_field{
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+#my_articles li div{
+  display: block;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+#img_field svg{
+  display: block;
+  width: 25%;
+  height: 25%;
+  fill: #cccccc;
+  transition:all 0.15s ;
+}
+#img_field :hover svg{
+  fill: #66c0ee;
+}
+#img_field img{
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+#comment_field textarea{
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: 0;
+  border: 1px solid #e4e4e4;
+  font-size: 2rem;
+  padding: 1rem;
+  resize: none;
+  box-sizing: border-box;
+  border-radius: 5px;
+}

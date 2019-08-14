@@ -10,6 +10,48 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= ./normalize.css
+ *= require bootstrap/dist/css/bootstrap.min
  *= require_tree .
  *= require_self
  */
+html{
+  font-size: 62.5%;
+  line-height: 62.5%;
+  font-family: Arial, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, メイリオ, Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+body{
+  background-color: #f8f8f8;
+  color: #1d2129;
+}
+#container{
+  margin: 52px auto;
+  padding: 10px 0;
+  overflow: hidden;
+}
+#container, .container-fluid{
+  max-width: 960px;
+}
+.navbar{
+  background-color: #ffffff;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #e4e4e4;
+  position: fixed;
+  top:0;
+  width: 100%;
+}
+.navbar a{
+  color: #000000;
+}
+.container-fluid{
+  box-sizing: border-box;
+  height: 100%;
+}
+.navbar-nav{
+  float: right;
+}
+.nav a:hover{
+  background-color: #385898!important;
+}

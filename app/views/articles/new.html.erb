@@ -1,0 +1,59 @@
+<div id="profile">
+  <div id="prof_left">
+    <a href="<%= user_path(current_user.id) %>">
+      <%= image_tag(current_user.image.url) if current_user.image && current_user.image.url %>
+    </a>
+  </div>
+  <ul id="prof_right">
+    <li>
+      <h2><%= current_user.name %></h2>
+    </li>
+    <li><div>投稿<%= content_tag(:span, "12") %>件</div><div>お気に入り<%= content_tag(:span, "4") %>件</div></li>
+    <li><h3>comment</h3><%= current_user.comment %></li>
+  </ul>
+</div>
+<div id="my_articles">
+  <%= form_with(model: @article, local: true) do |form| %>
+  <ul class="row">
+    <%= form.file_field :image, style: "display:none;", id: "file"%>
+    <li id="img_field" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" onClick="$('#file').click()" >
+      <div>
+      <%= embedded_svg("picture.svg", class: "add_image") %>
+      <%= image_tag(@article.image.url) if @article.image && @article.image.url %>
+      </div>
+    </li>
+    <li id="comment_field" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+      <%= form.text_area :content, placeholder:"comment area" %>
+    </li>
+  </ul>
+  <%= form.submit "投稿する", class:"btn_submit" %>
+  <%= form.submit "戻る", name: "back" %>
+  <% end %>
+</div>
+
+<script>
+$(function() {
+  $('#my_articles li').autoSquare();
+  $('#img_field svg').autoCenter();
+  $fileField = $('#file')
+  $($fileField).on('change', $fileField, function(e) {
+    file = e.target.files[0]
+    reader = new FileReader(),
+    $preview = $("#img_field");
+    reader.onload = (function(file) {
+      return function(e) {
+        $preview.empty();
+        $preview.append($('<img>').attr({
+          src: e.target.result,
+          width: "100%",
+          class: "preview",
+          title: file.name
+        }));
+      };
+    })(file);
+    reader.readAsDataURL(file);
+  });
+  let comment_height = ('#img_field').width();
+  $('#comment_field').css({'height':comment_height});
+});
+</script>

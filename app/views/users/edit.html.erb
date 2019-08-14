@@ -9,11 +9,12 @@
     <div>プロフィール画像：</div>
     <div id="img_field_edit" onClick="$('#file').click()" >
       aaaaa
-    <% if @user.image.url.present? %>
-      <%= image_tag(@user.image.url) %>
-    <% end %>
+      <div id="img_field">
+      <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
+      </div>
     </div>
     <%= f.file_field :image, style: "display:none;", id: "file"%>
+    <%= f.hidden_field :image_cache %>
   </li>
   <li>
     <div>紹介文：</div>
@@ -32,6 +33,7 @@
     <div><%= f.password_field :password_confirmation %></div>
   </li>
   <%= f.submit "変更" %>
+  <%= link_to "戻る", user_path(current_user.id) %>
 </ul>
 <% end %>
 <script>

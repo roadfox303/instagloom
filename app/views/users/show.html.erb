@@ -1,7 +1,55 @@
-<h1><%= current_user.name %>のページ</h1>
-<p>メールアドレス: <%= current_user.email %></p>
-<div><%= current_user.comment %></div>
-<div><%= current_user.image %></div>
+<div id="profile">
+  <div id="prof_left">
+    <a href="<%= edit_user_path %>">
+      <%= image_tag(current_user.image.url) if current_user.image && current_user.image.url %>
+    </a>
+  </div>
+  <ul id="prof_right">
+    <li>
+      <h2><%= current_user.name %></h2>
+      <a href="<%= edit_user_path(current_user.id) %>" class="">
+        プロフィール編集
+        <%= embedded_svg("edit.svg", class: "menu_icon") %>
+      </a>
+    </li>
+    <li><div>投稿<%= content_tag(:span, "12") %>件</div><div>お気に入り<%= content_tag(:span, "4") %>件</div></li>
+    <li><h3>comment</h3><%= current_user.comment %></li>
+  </ul>
+</div>
+<div id="my_articles">
+  <ul class="row">
+    <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><a href="<%= new_article_path(current_user.id) %>" class="">あああ</a></li>
+    <% unless @articles.blank? %>
+      <% @articles.each do |a| %>
+      <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <%= image_tag a.image.url %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
 
-<%= link_to "プロフィールの変更", edit_user_path(current_user.id) %>
-<%= link_to "記事一覧", articles_path %>
+<% unless @article.blank? %>
+<div id="my_articles" class="box single">
+  <div class="column_title">投稿内容</div>
+  <a href="" class="prof_icon"></a>
+    <%= simple_format(@article.content) %>
+    <% if @article.image? %>
+    <div id="img_field" >
+        <%= image_tag @article.image.url %>
+    </div>
+    <% end %>
+    <div class="article_menu">
+      <ul>
+        <li><%= link_to "戻る", articles_path %></li>
+        <li><%= link_to "編集", edit_article_path(@article.id) %></li>
+        <li><%= link_to "削除", article_path(@article.id), method: :delete %></li>
+      </ul>
+    </div>
+</div>
+<% end %>
+<script>
+$(function() {
+  $('#my_articles li').autoSquare();
+});
+</script>

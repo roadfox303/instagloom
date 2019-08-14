@@ -41,6 +41,7 @@ class UsersController < ApplicationController
   def show
     if logged_in?
       @user = current_user
+      @articles = Article.where(user_id: current_user.id)
     else
       redirect_to new_session_path
     end
@@ -48,6 +49,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :comment)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :comment, :image, :image_cache, :remove_image)
   end
 end
