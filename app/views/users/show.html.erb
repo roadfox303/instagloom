@@ -12,17 +12,31 @@
         <%= embedded_svg("edit.svg", class: "menu_icon") %>
       </a>
     </li>
-    <li><div>投稿<%= content_tag(:span, "12") %>件</div><div>お気に入り<%= content_tag(:span, "4") %>件</div></li>
+    <li><div>投稿<span><%= @articles.length %></span>件</div><div>お気に入り<%= content_tag(:span, "4") %>件</div></li>
     <li><h3>comment</h3><%= current_user.comment %></li>
   </ul>
 </div>
 <div id="my_articles">
   <ul class="row">
-    <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><a href="<%= new_article_path(current_user.id) %>" class="">あああ</a></li>
+    <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <a href="<%= new_article_path(current_user.id) %>" class="add">
+        <%= embedded_svg("add.svg", class: "add_icon") %>
+      </a>
+    </li>
     <% unless @articles.blank? %>
       <% @articles.each do |a| %>
       <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <%= image_tag a.image.url %>
+        <div class="add">
+          <%= image_tag a.image.url %>
+          <div class="articleMenu hiddenBox">
+            <nav>
+              <a href=""><%= embedded_svg("monitor.svg", class: "a_menuIcon") %></a>
+              <a href=""><%= embedded_svg("edit.svg", class: "a_menuIcon") %></a>
+              <a href=""><%= embedded_svg("delete.svg", class: "a_menuIcon") %></a>
+            </nav>
+            <div class="articleComment"><%= simple_format(a.comment) %></div>
+          </div>
+        </div>
       </li>
       <% end %>
     <% end %>
@@ -51,5 +65,9 @@
 <script>
 $(function() {
   $('#my_articles li').autoSquare();
+  $('.add svg').autoCenter();
+});
+$(window).load(function () {
+  $('.add svg').autoCenter();
 });
 </script>

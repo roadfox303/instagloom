@@ -60,7 +60,7 @@
   text-decoration: none;
   color: #000000;
 }
-#prof_right svg{
+#prof_right .menu_icon{
   height: 1rem;
   width: 1rem;
   margin-left: 0.5rem;
@@ -100,12 +100,17 @@
   margin-bottom: 20px;
   padding: 0;
 }
-#my_articles li a{
+#my_articles li .add{
   display: block;
   height: 100%;
   width: 100%;
   background-color: #f0f0f0;
-  cursor: pointer;
+  position: relative;
+}
+#my_articles li img{
+  object-fit: cover;
+  height: 100%;
+  width:100%;
 }
 #my_articles li:first-child a{
   border: 1px solid #e4e4e4;
@@ -116,6 +121,65 @@
 #my_articles li:nth-child(3n+3){
   padding-left: 20px;
 }
+.add .add_icon{
+  display: block;
+  width: 25%;
+  height: 25%;
+  fill: #cccccc;
+  transition:all 0.15s ;
+}
+.add:hover .add_icon{
+  fill: #66c0ee;
+}
+.articleMenu{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10%;;
+  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.hiddenBox{
+  background-color: rgba(0,0,0,0);
+  opacity: 0;
+  transition:all 0.35s ;
+}
+.hiddenBox:hover{
+  background-color: rgba(0,0,0,0.45);
+  opacity: 1;
+}
+.articleMenu nav{
+  display: table;
+  height: 4rem;
+  width: 100%;
+  padding-bottom: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: solid 1px #fff;
+}
+.articleMenu nav a{
+  display: table-cell;
+  height: 100%;
+  position: relative;
+}
+.articleMenu nav a svg{
+  position: absolute;
+  top: 0!important;
+  left: 0!important;
+  height: 100%;
+  width: 100%;
+  fill: #ffffff;
+  transition:all 0.3s ;
+}
+.articleMenu nav a:hover svg{
+  fill: #00aaff;
+}
+.articleComment{
+  overflow: hidden;
+}
+
 @media screen and (max-width:750px) {
   #my_articles li {
     margin-bottom: 4px;

@@ -33,7 +33,7 @@
     <div><%= f.password_field :password_confirmation %></div>
   </li>
   <%= f.submit "変更" %>
-  <%= link_to "戻る", user_path(current_user.id) %>
+  <%= f.submit "戻る", name: "back" %>
 </ul>
 <% end %>
 <script>

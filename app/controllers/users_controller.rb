@@ -24,14 +24,22 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    if params[:back]
+      redirect_to user_path(@user.id)
+    end
   end
 
   def update
     @user = User.find(params[:id])
-
-    if @user.update(user_params)
-      flash[:success] = "Your account was updated"
+    if params[:user][:image].blank?
+      params[:user].delete("image")
+      params[:user].delete("image_cache")
+    end
+    if params[:back]
       redirect_to user_path(@user.id)
+    elsif @user.update(user_params)
+      flash[:success] = "Your account was updated"
+      redirect_to user_path(current_user.id)
     else
       render 'edit'
     end
@@ -41,7 +49,7 @@ class UsersController < ApplicationController
   def show
     if logged_in?
       @user = current_user
-      @articles = Article.where(user_id: current_user.id)
+      @articles = Article.where(user_id: current_user.id).reverse
     else
       redirect_to new_session_path
     end

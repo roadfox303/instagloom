@@ -27,7 +27,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.user_id = current_user.id
     if params[:back]
-      render :index
+      redirect_to user_path(current_user.id)
     else
       article_check(@article.update(article_params), "create")
     end
