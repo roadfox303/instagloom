@@ -1,0 +1,44 @@
+<div id="profile">
+  <div id="prof_left">
+    <a href="<%= user_path(current_user.id) %>">
+      <%= image_tag(current_user.image.url) if current_user.image && current_user.image.url %>
+    </a>
+  </div>
+  <ul id="prof_right">
+    <li>
+      <h2><%= current_user.name %></h2>
+    </li>
+    <li><div>投稿<span><%= @article_num %></span>件</div><div>お気に入り<span><%= @favorite_num %></span>件</div></li>
+    <li><h3>comment</h3><%= current_user.comment %></li>
+  </ul>
+</div>
+<div id="my_articles">
+  <%= form_with(model: @article, url: articles_path, local: true) do |form| %>
+  <ul class="row">
+    <%= form.file_field :image, style: "display:none;", id: "file"%>
+    <li id="img_field" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" >
+      <div style="cursor:default;">
+      <%= form.hidden_field :image_cache %>
+      <%= image_tag(@article.image.url) if @article.image && @article.image.url %>
+      </div>
+    </li>
+    <li id="comment_field" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+      <%= form.hidden_field :comment %>
+      <div><%= @article.comment %></div>
+    </li>
+  </ul>
+  <%= form.submit "投稿する", class:"btn_submit" %>
+  <% end %>
+  <%= form_with(model:@article, url:articles_path, local:true, method:"get") do |form| %>
+    <%= form.hidden_field :image_cache %>
+    <%= form.submit "戻る", name: "back" %>
+  <% end %>
+</div>
+
+<script>
+$(function() {
+  $('#my_articles li').autoSquare();
+  let comment_height = ('#img_field').width();
+  $('#comment_field').css({'height':comment_height});
+});
+</script>

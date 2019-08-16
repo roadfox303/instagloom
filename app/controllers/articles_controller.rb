@@ -18,6 +18,8 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    @favorite_num = current_user.favorites.length
+    @article_num = Article.where(user_id: current_user.id).length
     if params[:back]
       @article = Article.new(article_params)
     else

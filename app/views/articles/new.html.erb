@@ -8,12 +8,12 @@
     <li>
       <h2><%= current_user.name %></h2>
     </li>
-    <li><div>投稿<%= content_tag(:span, "12") %>件</div><div>お気に入り<%= content_tag(:span, "4") %>件</div></li>
+    <li><div>投稿<span><%= @article_num %></span>件</div><div>お気に入り<span><%= @favorite_num %></span>件</div></li>
     <li><h3>comment</h3><%= current_user.comment %></li>
   </ul>
 </div>
 <div id="my_articles">
-  <%= form_with(model: @article, local: true) do |form| %>
+  <%= form_with(model: @article, local: true, url:confirm_articles_path) do |form| %>
   <ul class="row">
     <%= form.file_field :image, style: "display:none;", id: "file"%>
     <li id="img_field" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" onClick="$('#file').click()" >
