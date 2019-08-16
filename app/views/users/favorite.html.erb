@@ -28,22 +28,25 @@ $(window).on("load resize",function () {
 </div>
 <div id="my_articles">
   <ul class="row">
-    
+
     <% unless @favorites.blank? %>
       <% @favorites.each do |a| %>
       <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <a href="<%= article_path(a.article.id) %>">
         <div class="add">
           <%= image_tag a.article.image.url %>
-          <div class="articleMenu hiddenBox">
-            <nav>
+          <div class="favorite_menu hiddenBox">
+            <div class="favorite_prof">
               <%= image_tag(a.article.user.image.thumb.url) if a.article.user.image && a.article.user.image.url %>
               <%= a.article.user.name %>
-            </nav>
+              <nav>
+                <a href="<%= article_path(a.article.id) %>"><%= embedded_svg("monitor.svg", class: "a_menuIcon") %></a>
+                <a href="<%=  %>" data-method="delete"><%= embedded_svg("delete.svg", class: "a_menuIcon") %></a>
+              </nav>
+            </div>
+
             <div class="articleComment"><%= simple_format(a.article.comment) %></div>
           </div>
         </div>
-        </a>
       </li>
       <% end %>
     <% end %>

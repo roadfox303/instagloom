@@ -174,14 +174,20 @@
   fill: #ffffff;
   transition:all 0.3s ;
 }
-.articleMenu nav a:hover svg{
+.articleMenu nav a:hover svg,.favorite_menu a:hover svg{
   fill: #00aaff;
 }
-.articleMenu img{
-  height: 4rem!important;
-  width: 4rem!important;
-  margin-right: 1rem;
-  border-radius: 50%;
+.favorite_prof_L{
+  display: inline!important;
+  width: auto!important;
+  height: auto!important;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.6rem;
+}
+.favorite_prof_L:hover{
+  text-decoration: none;
+  color: #ffffff;
 }
 .add .date{
   color: #fff;
@@ -191,6 +197,72 @@
 .articleComment{
   height: auto!important;
   overflow: hidden;
+}
+.favorite_menu{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10%;;
+  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.favorite_prof{
+  height: 4rem!important;
+  width: auto;
+  width: auto;
+}
+.favorite_menu img{
+  height: 4rem!important;
+  width: 4rem!important;
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+.favorite_menu nav{
+  width: 30%;
+  padding-bottom: none!important;
+  margin-bottom: none!important;
+  height: 4rem!important;
+  float: right;
+  overflow: hidden;
+  border: none;
+}
+.favorite_menu a{
+  display: table-cell;
+  height: 4rem;
+  width: 4rem;
+  position: relative;
+  padding: none!important
+}
+.favorite_menu a svg{
+  position: relative;
+  display: block;
+  top: 0!important;
+  left: 0!important;
+  height: 4rem!important;
+  width: 4rem!important;
+  padding: 0 1rem;
+  fill: #ffffff;
+  transition:all 0.3s ;
+}
+.favorite_menu .articleComment{
+  clear: both;
+  border-top: solid 1px #ffffff;
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+.prof_img_upload,#img_field_edit{
+  height: 150px;
+  width:150px;
+  background: #cccccc;
+  border-radius: 75px;
+  cursor: pointer;
+  overflow: hidden;
+}
+#img_field_edit{
+
 }
 
 @media screen and (max-width:750px) {

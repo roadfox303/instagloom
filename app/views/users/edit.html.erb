@@ -8,8 +8,7 @@
   <li>
     <div>プロフィール画像：</div>
     <div id="img_field_edit" onClick="$('#file').click()" >
-      aaaaa
-      <div id="img_field">
+      <div id="img_field" class="prof_img_upload">
       <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
       </div>
     </div>

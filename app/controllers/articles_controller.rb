@@ -44,6 +44,9 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    if @article.user_id != current_user.id
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def update
