@@ -24,10 +24,16 @@ body{
   background-color: #f8f8f8;
   color: #1d2129;
 }
+header{
+  z-index: 10!important;
+  position: relative;
+}
 #container{
   margin: 52px auto;
   padding: 10px 0;
   overflow: hidden;
+  z-index: 1!important;
+  position: relative;
 }
 #container, .container-fluid{
   max-width: 960px;
@@ -54,4 +60,7 @@ body{
 }
 .nav a:hover{
   background-color: #385898!important;
+}
+.hidden{
+  display: none;
 }

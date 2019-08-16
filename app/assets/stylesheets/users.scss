@@ -43,6 +43,7 @@
   margin: 0;
   padding: 0;
   font-size: 3rem;
+  font-weight: normal;
   width: auto;
   display: block;
   float: left;
@@ -116,10 +117,10 @@
   border: 1px solid #e4e4e4;
 }
 #my_articles li:nth-child(3n+1){
-  padding-right: 20px;
+  padding-right: 28px;
 }
 #my_articles li:nth-child(3n+3){
-  padding-left: 20px;
+  padding-left: 28px;
 }
 .add .add_icon{
   display: block;
@@ -176,7 +177,13 @@
 .articleMenu nav a:hover svg{
   fill: #00aaff;
 }
+.add .date{
+  color: #fff;
+  height: 1rem!important;
+  margin-bottom: 15px;
+}
 .articleComment{
+  height: auto!important;
   overflow: hidden;
 }
 
@@ -190,6 +197,9 @@
   #my_articles li:nth-child(3n+3){
     padding-left: 4px;
   }
+  .add .date{
+    font-size: 1.3rem;
+  }
 }
 @media screen and (max-width:640px) {
   #prof_right li:first-child h2{
@@ -198,5 +208,8 @@
   #prof_right li:first-child a{
     width:auto;
     margin: 1rem 0;
+  }
+  .add .date{
+    font-size: 1rem;
   }
 }

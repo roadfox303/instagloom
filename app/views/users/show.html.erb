@@ -1,7 +1,17 @@
+<script>
+$(function() {
+  $('.add svg').autoCenter();
+  $('#my_articles li').autoSquare();
+
+});
+$(window).on("load resize",function () {
+  $('.add svg').autoCenter();
+});
+</script>
 <div id="profile">
   <div id="prof_left">
     <a href="<%= edit_user_path %>">
-      <%= image_tag(current_user.image.url) if current_user.image && current_user.image.url %>
+      <%= image_tag(current_user.image.thumb.url) if current_user.image && current_user.image.url %>
     </a>
   </div>
   <ul id="prof_right">
@@ -30,10 +40,11 @@
           <%= image_tag a.image.url %>
           <div class="articleMenu hiddenBox">
             <nav>
-              <a href=""><%= embedded_svg("monitor.svg", class: "a_menuIcon") %></a>
-              <a href=""><%= embedded_svg("edit.svg", class: "a_menuIcon") %></a>
-              <a href=""><%= embedded_svg("delete.svg", class: "a_menuIcon") %></a>
+              <a href="<%= article_path(a.id) %>"><%= embedded_svg("monitor.svg", class: "a_menuIcon") %></a>
+              <a href="<%= edit_article_path(a.id) %>"><%= embedded_svg("edit.svg", class: "a_menuIcon") %></a>
+              <a href="<%= article_path(a.id) %>" data-method="delete"><%= embedded_svg("delete.svg", class: "a_menuIcon") %></a>
             </nav>
+            <div class="date">UPDATE : <%= a.updated_at.strftime("%Y-%m-%d %H:%M")%></div>
             <div class="articleComment"><%= simple_format(a.comment) %></div>
           </div>
         </div>
@@ -62,12 +73,3 @@
     </div>
 </div>
 <% end %>
-<script>
-$(function() {
-  $('#my_articles li').autoSquare();
-  $('.add svg').autoCenter();
-});
-$(window).load(function () {
-  $('.add svg').autoCenter();
-});
-</script>

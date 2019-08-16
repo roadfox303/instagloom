@@ -3,12 +3,7 @@ class ArticlesController < ApplicationController
 
   def index
     @users = User.all
-    if current_user.present?
-      @articles = Article.where(user_id: current_user.id).reverse
-    else
-      @articles = []
-    end
-    @article = Article.new
+    @articles = Article.all.reverse
   end
 
   def new
@@ -34,7 +29,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @users = User.all
+    @article = Article.find(params[:id])
   end
 
   def edit
@@ -47,7 +42,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    redirect_to articles_path, notice:"記事を削除しました"
+    redirect_to user_path(current_user.id), notice:"記事を削除しました"
   end
 
   private
@@ -65,10 +60,10 @@ class ArticlesController < ApplicationController
       when "create" then
       redirect_to user_path(current_user.id), notice: "記事を投稿しました"
       when "update" then
-      redirect_to articles_path, notice: "記事を編集しました"
+      redirect_to user_path(current_user.id), notice: "記事を編集しました"
       end
     else
-      redirect_to articles_path, notice: "投稿できませんでした"
+      redirect_to user_path(current_user.id), notice: "投稿できませんでした"
     end
   end
 end

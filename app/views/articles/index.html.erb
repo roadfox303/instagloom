@@ -1,20 +1,34 @@
-<h1>article</h1>
+<h1>articles</h1>
 <div id="articles">
   <ul>
     <% @articles.each do |log| %>
-    <li>
+    <li class="article">
       <div class="article_header">
-        <div class="profile"><%= @users.find_by(id: log.user_id).name %></div>
+        <div class="profile">
+          <a href="">
+            <div class="prof_img">
+              <%= image_tag(log.user.image.thumb.url) if log.user.image && log.user.image.url %>
+            </div>
+            <div class="prof_name"><%= log.user.name %></div>
+          </a>
+        </div>
         <div class="article_menu">
           <ul>
-            <li><%= link_to "詳細", article_path(log.id) %></li>
-            <li><%= link_to "編集", edit_article_path(log.id) %></li>
-            <li><%= link_to "削除", article_path(log.id), method: :delete %></li>
+            <li><a href="<%= article_path(log.id) %>"><%= embedded_svg("monitor.svg", class: "a_menuIcon") %></a></li>
+            <li>
+              <a href="<%= article_path(log.id) %>"><%= embedded_svg("love.svg", class: "a_menuIcon") %></a>
+            </li>
           </ul>
         </div>
       </div>
       <div class="image"><%= image_tag(log.image.url) if log.image && log.image.url %></div>
-      <div class="comment"><%= simple_format(log.content) %></div>
+
+      <div class="comment">
+        <span class="nice">いいね! 12234 件</span>
+        <% unless log.comment.blank? %>
+          <%= simple_format(log.comment) %>
+        <% end %>
+      </div>
     </li>
     <% end %>
   </ul>

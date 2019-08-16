@@ -1,7 +1,7 @@
 <div id="profile">
   <div id="prof_left">
     <a href="<%= user_path(current_user.id) %>">
-      <%= image_tag(current_user.image.url) if current_user.image && current_user.image.url %>
+      <%= image_tag(current_user.image.thumb.url) if current_user.image && current_user.image.url %>
     </a>
   </div>
   <ul id="prof_right">
@@ -18,7 +18,6 @@
     <%= form.file_field :image, style: "display:none;", id: "file"%>
     <li id="img_field" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" onClick="$('#file').click()" >
       <div>
-      <%= embedded_svg("picture.svg", class: "add_image") %>
       <%= image_tag(@article.image.url) if @article.image && @article.image.url %>
       </div>
     </li>
@@ -32,15 +31,6 @@
 </div>
 
 <script>
-// $(document).on('change', 'input[type=file]', function () {
-//   if ($(this).val() != ""){
-//     $('.btn_submit').removeClass('hidden');
-//   }
-//   else{
-//     $('.btn_submit').addClass('hidden');
-//     $(this).empty();
-//   }
-// });
 $(function() {
   $('#my_articles li').autoSquare();
   $('#img_field svg').autoCenter();
@@ -64,6 +54,5 @@ $(function() {
   });
   let comment_height = ('#img_field').width();
   $('#comment_field').css({'height':comment_height});
-
 });
 </script>
