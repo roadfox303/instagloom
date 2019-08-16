@@ -22,13 +22,13 @@ $(window).on("load resize",function () {
         <%= embedded_svg("edit.svg", class: "menu_icon") %>
       </a>
     </li>
-    <li><div>投稿<span><%= @articles.length %></span>件</div><div>お気に入り<%= content_tag(:span, "4") %>件</div></li>
+    <li><div>投稿<span><%= @article_num %></span>件</div><div>お気に入り<span><%= @favorite_num %></span>件</div></li>
     <li><h3>comment</h3><%= current_user.comment %></li>
   </ul>
 </div>
 <div id="my_articles">
   <ul class="row">
-    <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4 new_article">
       <a href="<%= new_article_path(current_user.id) %>" class="add">
         <%= embedded_svg("add.svg", class: "add_icon") %>
       </a>

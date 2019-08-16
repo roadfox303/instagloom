@@ -1,0 +1,51 @@
+<script>
+$(function() {
+  $('.add svg').autoCenter();
+  $('#my_articles li').autoSquare();
+
+});
+$(window).on("load resize",function () {
+  $('.add svg').autoCenter();
+});
+</script>
+<div id="profile">
+  <div id="prof_left">
+    <a href="<%= edit_user_path %>">
+      <%= image_tag(current_user.image.thumb.url) if current_user.image && current_user.image.url %>
+    </a>
+  </div>
+  <ul id="prof_right">
+    <li>
+      <h2><%= current_user.name %></h2>
+      <a href="<%= edit_user_path(current_user.id) %>" class="">
+        プロフィール編集
+        <%= embedded_svg("edit.svg", class: "menu_icon") %>
+      </a>
+    </li>
+    <li><div>投稿<span><%= @article_num %></span>件</div><div>お気に入り<span><%= @favorite_num %></span>件</div></li>
+    <li><h3>comment</h3><%= current_user.comment %></li>
+  </ul>
+</div>
+<div id="my_articles">
+  <ul class="row">
+    
+    <% unless @favorites.blank? %>
+      <% @favorites.each do |a| %>
+      <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <a href="<%= article_path(a.article.id) %>">
+        <div class="add">
+          <%= image_tag a.article.image.url %>
+          <div class="articleMenu hiddenBox">
+            <nav>
+              <%= image_tag(a.article.user.image.thumb.url) if a.article.user.image && a.article.user.image.url %>
+              <%= a.article.user.name %>
+            </nav>
+            <div class="articleComment"><%= simple_format(a.article.comment) %></div>
+          </div>
+        </div>
+        </a>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

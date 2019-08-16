@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  before_action :set_profile, only: [:edit, :show, :favorite]
+  def set_profile
+    @favorite_num = current_user.favorites.length
+    @article_num = Article.where(user_id: current_user.id).length
+  end
   def new
 
     if params[:back]
@@ -19,6 +24,15 @@ class UsersController < ApplicationController
       redirect_to user_path(@user.id)
     else
       render 'new'
+    end
+  end
+
+  def favorite
+    if logged_in?
+      @user = current_user
+      @favorites = current_user.favorites.reverse
+    else
+      redirect_to new_session_path
     end
   end
 

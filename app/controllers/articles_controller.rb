@@ -1,9 +1,20 @@
 class ArticlesController < ApplicationController
   before_action :set_id, only: [:edit,  :destroy, :update, :show]
+  before_action :set_profile, only: [:edit, :show]
+  def set_profile
+    if logged_in?
+      @favorite_num = current_user.favorites.length
+      @article_num = Article.where(user_id: current_user.id).length
+    end
+  end
 
   def index
     @users = User.all
     @articles = Article.all.reverse
+    if logged_in?
+      @favorites = current_user.favorites
+    end
+
   end
 
   def new

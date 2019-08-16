@@ -8,7 +8,10 @@
     <li>
       <h2><%= @article.user.name %></h2>
     </li>
-    <li><div>投稿<%= content_tag(:span, "12") %>件</div><div>お気に入り<%= content_tag(:span, "4") %>件</div></li>
+    <li>
+      <div>投稿 <span><%= Article.where(user_id: @article.user.id).length %></span> 件</div>
+      <div>お気に入り <span><%= @article.user.favorites.length %></span> 件</div>
+    </li>
     <li><h3>comment</h3><%= @article.user.comment %></li>
   </ul>
 </div>

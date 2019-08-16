@@ -2,7 +2,7 @@
 <div id="articles">
   <ul>
     <% @articles.each do |log| %>
-    <li class="article">
+    <li class="article" id="article_<%= log.id %>">
       <div class="article_header">
         <div class="profile">
           <a href="">
@@ -15,16 +15,22 @@
         <div class="article_menu">
           <ul>
             <li><a href="<%= article_path(log.id) %>"><%= embedded_svg("monitor.svg", class: "a_menuIcon") %></a></li>
-            <li>
-              <a href="<%= article_path(log.id) %>"><%= embedded_svg("love.svg", class: "a_menuIcon") %></a>
-            </li>
+            <% if logged_in? %>
+              <% unless log.user_id == current_user.id %>
+                <% if @favorites.find_by(article_id: log.id) %>
+                  <li><a href="<%= favorite_path(@favorites.where(article_id: log.id)[0][:id], article_id: log.id) %>" data-method="delete"><%= embedded_svg("love2.svg", class: "a_menuIcon") %></a></li>
+                <% else %>
+                  <li><a href="<%= favorites_path(article_id: log.id) %>" data-method="post"><%= embedded_svg("love.svg", class: "a_menuIcon") %></a></li>
+                <% end %>
+              <% end %>
+            <% end %>
           </ul>
         </div>
       </div>
       <div class="image"><%= image_tag(log.image.url) if log.image && log.image.url %></div>
 
       <div class="comment">
-        <span class="nice">いいね! 12234 件</span>
+        <span class="nice">いいね! <%= log.favorites.length %> 件</span>
         <% unless log.comment.blank? %>
           <%= simple_format(log.comment) %>
         <% end %>

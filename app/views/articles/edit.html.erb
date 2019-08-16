@@ -8,7 +8,7 @@
     <li>
       <h2><%= current_user.name %></h2>
     </li>
-    <li><div>投稿<%= content_tag(:span, "12") %>件</div><div>お気に入り<%= content_tag(:span, "4") %>件</div></li>
+    <li><div>投稿<span><%= @article_num %></span>件</div><div>お気に入り<span><%= @favorite_num %></span>件</div></li>
     <li><h3>comment</h3><%= current_user.comment %></li>
   </ul>
 </div>
