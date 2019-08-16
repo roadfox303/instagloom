@@ -38,6 +38,7 @@ class ArticlesController < ApplicationController
       redirect_to user_path(current_user.id)
     else
       article_check(@article.update(article_params), "create")
+      ContactMailer.notice_mail(current_user).deliver
     end
   end
 
