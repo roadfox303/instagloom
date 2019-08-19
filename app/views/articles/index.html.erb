@@ -1,5 +1,6 @@
 <h1>articles</h1>
 <div id="articles">
+  <% unless @article.empty?%>
   <ul>
     <% @articles.each do |log| %>
     <li class="article" id="article_<%= log.id %>">
@@ -37,4 +38,5 @@
     </li>
     <% end %>
   </ul>
+  <% end %>
 </div>
