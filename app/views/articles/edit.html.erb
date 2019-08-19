@@ -18,7 +18,7 @@
     <%= form.file_field :image, style: "display:none;", id: "file"%>
     <li id="img_field" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" onClick="$('#file').click()" >
       <div>
-      <%= image_tag(@article.image.url) if @article.image && @article.image.url %>
+      <%= image_tag(@article.image.thumb.url) if @article.image && @article.image.url %>
       </div>
     </li>
     <li id="comment_field" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">

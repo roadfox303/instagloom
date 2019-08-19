@@ -1,7 +1,7 @@
 <div id="profile">
   <div id="prof_left">
     <a href="<%= user_path(current_user.id) %>">
-      <%= image_tag(current_user.image.url) if current_user.image && current_user.image.url %>
+      <%= image_tag(current_user.image.thumb.url) if current_user.image && current_user.image.url %>
     </a>
   </div>
   <ul id="prof_right">
