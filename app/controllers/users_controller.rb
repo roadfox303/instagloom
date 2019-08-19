@@ -4,17 +4,13 @@ class UsersController < ApplicationController
     @favorite_num = current_user.favorites.length
     @article_num = Article.where(user_id: current_user.id).length
   end
-  def new
 
+  def new
     if params[:back]
       redirect_to user_path(@user.id)
     else
       @user = User.new
     end
-  end
-
-  def confirm
-
   end
 
   def create

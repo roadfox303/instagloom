@@ -23,6 +23,7 @@ html{
 body{
   background-color: #f8f8f8;
   color: #1d2129;
+  margin: 0;
 }
 header{
   z-index: 10!important;
@@ -37,6 +38,9 @@ header{
 }
 #container, .container-fluid{
   max-width: 960px;
+}
+a:hover{
+  background-color: transparent;
 }
 .navbar{
   background-color: #ffffff;

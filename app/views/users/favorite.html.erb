@@ -2,7 +2,6 @@
 $(function() {
   $('.add svg').autoCenter();
   $('#my_articles li').autoSquare();
-
 });
 $(window).on("load resize",function () {
   $('.add svg').autoCenter();
@@ -28,7 +27,6 @@ $(window).on("load resize",function () {
 </div>
 <div id="my_articles">
   <ul class="row">
-
     <% unless @favorites.blank? %>
       <% @favorites.each do |a| %>
       <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -40,10 +38,9 @@ $(window).on("load resize",function () {
               <%= a.article.user.name %>
               <nav>
                 <a href="<%= article_path(a.article.id) %>"><%= embedded_svg("monitor.svg", class: "a_menuIcon") %></a>
-                <a href="<%=  %>" data-method="delete"><%= embedded_svg("delete.svg", class: "a_menuIcon") %></a>
+                <a href="<%= favorite_path(a.id, article_id: a.article.id) %>" data-method="delete"><%= embedded_svg("delete.svg", class: "a_menuIcon") %></a>
               </nav>
             </div>
-
             <div class="articleComment"><%= simple_format(a.article.comment) %></div>
           </div>
         </div>

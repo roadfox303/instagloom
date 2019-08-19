@@ -2,7 +2,6 @@
 $(function() {
   $('.add svg').autoCenter();
   $('#my_articles li').autoSquare();
-
 });
 $(window).on("load resize",function () {
   $('.add svg').autoCenter();
@@ -53,23 +52,3 @@ $(window).on("load resize",function () {
     <% end %>
   </ul>
 </div>
-
-<% unless @article.blank? %>
-<div id="my_articles" class="box single">
-  <div class="column_title">投稿内容</div>
-  <a href="" class="prof_icon"></a>
-    <%= simple_format(@article.content) %>
-    <% if @article.image? %>
-    <div id="img_field" >
-        <%= image_tag @article.image.url %>
-    </div>
-    <% end %>
-    <div class="article_menu">
-      <ul>
-        <li><%= link_to "戻る", articles_path %></li>
-        <li><%= link_to "編集", edit_article_path(@article.id) %></li>
-        <li><%= link_to "削除", article_path(@article.id), method: :delete %></li>
-      </ul>
-    </div>
-</div>
-<% end %>

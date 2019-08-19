@@ -27,20 +27,10 @@
     </li>
   </ul>
   <%= form.submit "投稿する", class:"btn_submit" %>
-  <%= form.submit "戻る", name: "back" %>
+  <%= link_to "戻る", user_path(current_user.id)%>
   <% end %>
 </div>
-
 <script>
-// $(document).on('change', 'input[type=file]', function () {
-//   if ($(this).val() != ""){
-//     $('.btn_submit').removeClass('hidden');
-//   }
-//   else{
-//     $('.btn_submit').addClass('hidden');
-//     $(this).empty();
-//   }
-// });
 $(function() {
   $('#my_articles li').autoSquare();
   $('#img_field svg').autoCenter();

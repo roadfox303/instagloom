@@ -28,7 +28,6 @@
         </div>
       </div>
       <div class="image"><%= image_tag(log.image.url) if log.image && log.image.url %></div>
-
       <div class="comment">
         <span class="nice">いいね! <%= log.favorites.length %> 件</span>
         <% unless log.comment.blank? %>
