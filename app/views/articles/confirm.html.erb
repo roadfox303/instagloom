@@ -29,8 +29,8 @@
   </ul>
   <%= form.submit "投稿する", class:"btn_submit" %>
   <% end %>
-  <%= form_with(model:@article, url:articles_path, local:true, method:"get") do |form| %>
-    <%= form.hidden_field :image_cache %>
+  <%= form_with(model:@article, url:new_article_path, local:true, method:"get") do |form| %>
+    <%= form.hidden_field :comment %>
     <%= form.submit "戻る", name: "back" %>
   <% end %>
 </div>
