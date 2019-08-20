@@ -80,7 +80,7 @@ class ArticlesController < ApplicationController
       redirect_to user_path(current_user.id), notice: "記事を編集しました"
       end
     else
-      redirect_to user_path(current_user.id), notice: "投稿できませんでした"
+      render :new, notice: "投稿できませんでした"
     end
   end
 end

@@ -262,6 +262,9 @@
   cursor: pointer;
   overflow: hidden;
 }
+#my_articles .field_with_errors{
+  display: none;
+}
 
 @media screen and (max-width:750px) {
   #my_articles li {
