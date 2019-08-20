@@ -9,29 +9,33 @@ $(window).on("load resize",function () {
 </script>
 <div id="profile">
   <div id="prof_left">
-    <a href="<%= edit_user_path %>">
-      <%= image_tag(current_user.image.thumb.url) if current_user.image && current_user.image.url %>
-    </a>
+    <div>
+      <%= image_tag(@user.image.thumb.url) if @user.image && @user.image.url %>
+    </div>
   </div>
   <ul id="prof_right">
     <li>
-      <h2><%= current_user.name %></h2>
+      <h2><%= @user.name %></h2>
+      <% if @user.id == current_user.id %>
       <a href="<%= edit_user_path(current_user.id) %>" class="">
         プロフィール編集
         <%= embedded_svg("edit.svg", class: "menu_icon") %>
+      <% end %>
       </a>
     </li>
-    <li><div>投稿<span><%= @article_num %></span>件</div><div>お気に入り<span><%= @favorite_num %></span>件</div></li>
-    <li><h3>comment</h3><%= current_user.comment %></li>
+    <li><div>投稿<span><%= Article.where(user_id: @user.id).length %></span>件</div><div>お気に入り<span><%= @user.favorites.length %></span>件</div></li>
+    <li><h3>comment</h3><%= @user.comment %></li>
   </ul>
 </div>
 <div id="my_articles">
   <ul class="row">
+    <% if @user.id == current_user.id %>
     <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4 new_article">
       <a href="<%= new_article_path(current_user.id) %>" class="add">
         <%= embedded_svg("add.svg", class: "add_icon") %>
       </a>
     </li>
+    <% end %>
     <% unless @articles.blank? %>
       <% @articles.each do |a| %>
       <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -40,10 +44,19 @@ $(window).on("load resize",function () {
           <div class="articleMenu hiddenBox">
             <nav>
               <a href="<%= article_path(a.id) %>"><%= embedded_svg("monitor.svg", class: "a_menuIcon") %></a>
+              <% if @user.id == current_user.id %>
               <a href="<%= edit_article_path(a.id) %>"><%= embedded_svg("edit.svg", class: "a_menuIcon") %></a>
               <a href="<%= article_path(a.id) %>" data-method="delete"><%= embedded_svg("delete.svg", class: "a_menuIcon") %></a>
+              <% else %>
+                <% if @favorites.find_by(article_id: a.id) %>
+                  <a href="<%= favorite_path(@favorites.where(article_id: a.id)[0][:id], article_id: a.id) %>" data-method="delete"><%= embedded_svg("love2.svg", class: "a_menuIcon") %></a>
+                <% else %>
+                  <a href="<%= favorites_path(article_id: a.id) %>" data-method="post"><%= embedded_svg("love.svg", class: "a_menuIcon") %></a>
+                <% end %>
+              <% end %>
             </nav>
-            <div class="date">UPDATE : <%= a.updated_at.strftime("%Y-%m-%d %H:%M")%></div>
+            <div class="date"><%= a.user.name%></div>
+            <div class="date"><%= a.updated_at.strftime("%Y-%m-%d %H:%M")%></div>
             <div class="articleComment"><%= simple_format(a.comment) %></div>
           </div>
         </div>

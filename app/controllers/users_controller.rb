@@ -25,8 +25,8 @@ class UsersController < ApplicationController
 
   def favorite
     if logged_in?
-      @user = current_user
-      @favorites = current_user.favorites.reverse
+      @user = User.find(params[:id])
+      @favorites = @user.favorites.reverse
     else
       redirect_to new_session_path
     end
@@ -62,8 +62,13 @@ class UsersController < ApplicationController
 
   def show
     if logged_in?
-      @user = current_user
-      @articles = Article.where(user_id: current_user.id).reverse
+      # @user = current_user
+      # @articles = Article.where(user_id: current_user.id).reverse
+      @user = User.find(params[:id])
+      if logged_in?
+        @favorites = current_user.favorites
+      end
+      @articles = Article.where(user_id: @user.id).reverse
     else
       redirect_to new_session_path
     end

@@ -10,15 +10,16 @@
   display: table-cell;
   width: 30%;
 }
-#prof_left a {
+#prof_left div {
   display: block;
   width: 150px;
   height: 150px;
   margin: 0 auto;
   border-radius: 50%;
   overflow: hidden;
+
 }
-#prof_left a img{
+#prof_left img{
   height: 100%;
   width:100%;
   object-fit: cover;

@@ -1,16 +1,16 @@
 <div id="profile">
   <div id="prof_left">
-    <a href="">
+    <div>
       <%= image_tag(@article.user.image.thumb.url) if @article.user.image && @article.user.image.url %>
-    </a>
+    </div>
   </div>
   <ul id="prof_right">
     <li>
       <h2><%= @article.user.name %></h2>
     </li>
     <li>
-      <div>投稿 <span><%= Article.where(user_id: @article.user.id).length %></span> 件</div>
-      <div>お気に入り <span><%= @article.user.favorites.length %></span> 件</div>
+      <div>投稿<span><%= Article.where(user_id: @article.user.id).length %></span>件</div>
+      <div>お気に入り<span><%= @article.user.favorites.length %></span>件</div>
     </li>
     <li><h3>comment</h3><%= @article.user.comment %></li>
   </ul>
